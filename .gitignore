@@ -1,0 +1,47 @@
+# -----------------------
+# Node / npm
+# -----------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# -----------------------
+# Next.js
+# -----------------------
+.next/
+out/
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# -----------------------
+# Logs
+# -----------------------
+logs/
+*.log
+pino.log
+
+# -----------------------
+# MongoDB
+# -----------------------
+mongodata/
+*.bson
+*.dump
+
+# -----------------------
+# Docker
+# -----------------------
+docker-compose.override.yml
+*.env
+
+# -----------------------
+# OS / IDE
+# -----------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,56 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ${APP_NAME}-backend
+    ports:
+      - "${NODE_PORT}:${NODE_PORT}"
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+    networks:
+      - api_test
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ${APP_NAME}-frontend
+    env_file:
+      - .env
+    ports:
+      - "${NEXT_PORT}:${NEXT_PORT}"
+    networks:
+      - api_test
+
+  redis:
+    image: redis:7
+    container_name: ${APP_NAME}-redis
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    networks:
+      - api_test
+
+  mongodb:
+    image: mongo:7
+    container_name: ${APP_NAME}-mongodb
+    restart: always
+    ports:
+      - "${MONGODB_PORT}:${MONGODB_PORT}"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB}
+    volumes:
+      - mongodata:/data/db
+    networks:
+      - api_test
+
+networks:
+  api_test:
+    driver: bridge
+
+volumes:
+  mongodata:
