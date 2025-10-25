@@ -12,6 +12,14 @@ services:
       - mongodb
     networks:
       - api_test
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./backend
+          target: /app
+        - action: rebuild
+          path: package.json
+          target: /app
 
   frontend:
     build:
@@ -22,6 +30,9 @@ services:
       - .env
     ports:
       - "${NEXT_PORT}:${NEXT_PORT}"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     networks:
       - api_test
 

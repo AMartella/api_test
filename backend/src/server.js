@@ -1,21 +1,13 @@
-const fastify = require('fastify')({ logger: true });
+import Fastify from "fastify";
+import App from "./app.js";
 
-require('dotenv').config();
-
+const fastify = Fastify({ logger: true });
 const PORT = process.env.NODE_PORT || 8080;
 
-fastify.get('/', async (request, reply) => {
-    return { message: 'Backend Fastify running!' };
-});
+fastify.register(App);
 
-const start = async () => {
-    try {
-        await fastify.listen({ port: PORT, host: '0.0.0.0' });
-        console.log(`Server listening on port ${PORT}`);
-    } catch (err) {
+fastify.listen({ port: PORT, host: '0.0.0.0' }, (err) => {
+    if (err) {
         fastify.log.error(err);
-        process.exit(1);
     }
-};
-
-start();
+});

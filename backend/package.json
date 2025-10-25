@@ -2,7 +2,7 @@
   "name": "api_test",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "node --watch src/server.js",
     "start": "node src/server.js"
@@ -14,15 +14,17 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/AMartella/api_test/issues"
   },
   "homepage": "https://github.com/AMartella/api_test#readme",
   "dependencies": {
+    "@fastify/autoload": "^6.3.1",
     "dotenv": "^17.2.3",
     "fastify": "^5.6.1",
     "fastify-cors": "^6.0.3",
+    "fastify-plugin": "^5.1.0",
     "ioredis": "^5.8.2",
     "mongoose": "^8.19.2"
   }
